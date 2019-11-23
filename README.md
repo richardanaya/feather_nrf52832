@@ -2,6 +2,9 @@
 
 This project is the most minimal blinking example I could coble together. Check out the `Makefile` for the commands that make it happen.
 
+* only depends on one python library for interacting with the device
+* has instruction for how to burn a bootloader
+
 # License
 
 This project is licensed under either of
