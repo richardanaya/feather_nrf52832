@@ -1,12 +1,13 @@
 build:
 	cargo build --target thumbv7em-none-eabi --release
-	cp target/thumbv7em-none-eabi/release/blinky blinky.bin
-	adafruit-nrfutil dfu genpkg --dev-type 0x0052 --sd-req 0x00B7 --application blinky.bin blinky.zip
+	arm-none-eabi-objcopy -O ihex target/thumbv7em-none-eabi/release/blinky blinky.hex
+	adafruit-nrfutil dfu genpkg --dev-type 0x0052 --sd-req 0x00B7 --application blinky.hex blinky.zip
 deps:
 	# for compiling bare metal to M4-cortex
 	rustup target add thumbv7em-none-eabi
 	# tools for deploying to feather
 	pip3 install --user adafruit-nrfutil
+	sudo dnf install arm-none-eabi-binutils-cs
 	# bootloader
 	wget https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/download/0.2.13/feather_nrf52832_bootloader-0.2.13_s132_6.1.1.zip
 	wget https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/download/0.2.13/feather_nrf52832_bootloader-0.2.13_s132_6.1.1.hex
